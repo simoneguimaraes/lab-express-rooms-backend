@@ -1,15 +1,19 @@
 const express = require("express");
-
-const router = express.Router();
+const router = require("express").Router();
+const bcrypt = require("bcryptjs");
 
 const RoomModel = require("../models/Room.Model");
+
+const generateToken = require("../config/jwt.config");
+const isAuthenticated = require("../middlewares/isAuthenticated");
+
+const salt_rounds = 10;
 
 //create new rooms
 //edit and delete the rooms
 //see the list of the rooms
 
-//POST - Criar produto ---> C
-
+//POST - Criar quarto ---> C
 router.post("/room", (req, res) => {
   RoomModel.create(req.body)
     .then((result) => res.status(201).json(result))
